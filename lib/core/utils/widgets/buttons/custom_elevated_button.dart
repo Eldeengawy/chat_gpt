@@ -50,7 +50,7 @@
 // }
 
 import 'package:chat_gpt/core/extensions/sized_box.dart';
-import 'package:chat_gpt/core/extensions/txt_theme.dart';
+import 'package:chat_gpt/core/static/app_styles.dart';
 import 'package:chat_gpt/core/theme/colors.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -90,14 +90,14 @@ class CustomElevatedButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: double.infinity,
-      height: height?.h ?? 44.h,
+      height: height?.h ?? 48.h,
       child: GestureDetector(
         onTap: onPressed,
         child: Container(
           alignment: Alignment.center,
           width: double.infinity,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(8),
             border: !isFilled
                 ? Border.all(
                     color: AppColors.primary,
@@ -122,18 +122,11 @@ class CustomElevatedButton extends StatelessWidget {
                           title.tr(),
                           textAlign: TextAlign.center,
                           // textScaleFactor: 0.5,
-                          style: context.theme.textTheme.bodyLarge!.copyWith(
-                            color: textColor ??
-                                (isFilled
-                                    ? AppColors.white
-                                    : AppColors.primary),
-                            fontWeight:
-                                boldTitle! ? FontWeight.w700 : FontWeight.w400,
-                          ),
+                          style: AppStyles.bold18white,
                         ),
                       ),
                       if (icon != null) ...[
-                        20.pw,
+                        12.pw,
                         SvgPicture.asset(
                           icon!,
                           colorFilter:

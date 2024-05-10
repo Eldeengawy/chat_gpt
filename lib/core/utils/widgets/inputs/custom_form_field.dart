@@ -3,7 +3,7 @@ import 'package:chat_gpt/core/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class CustomTextFormField extends StatelessWidget {
+class CustomTextFormField extends StatefulWidget {
   const CustomTextFormField({
     super.key,
     required this.controller,
@@ -38,87 +38,139 @@ class CustomTextFormField extends StatelessWidget {
   final void Function(String text)? onChanged;
 
   @override
+  State<CustomTextFormField> createState() => _CustomTextFormFieldState();
+}
+
+class _CustomTextFormFieldState extends State<CustomTextFormField> {
+  late FocusNode _focusNode;
+  final bool _isFocused = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _focusNode = FocusNode();
+  }
+
+  @override
+  void dispose() {
+    _focusNode.dispose();
+    super.dispose();
+  }
+
+  // void _onFocusChange() {
+  //   // setState(() {
+  //   _isFocused = _focusNode.hasFocus;
+  //   // });
+  // }
+
+  @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        SizedBox(
-          height: large ? 100.h : 50.h,
-          child: TextFormField(
-            readOnly: readonly,
-            style: AppStyles.semiBold15white.copyWith(fontSize: 16.sp),
-
-            showCursor: !readonly,
-            onTap: onTap,
-            autovalidateMode: AutovalidateMode.onUserInteraction,
-            cursorColor: Theme.of(context).colorScheme.primary,
-            autocorrect: true,
-            keyboardType: keyboardType,
-            controller: controller,
-            minLines: large ? 5 : 1,
-            maxLines: large ? 5 : 1,
-            // onTapOutside: (event) => FocusScope.of(context).unfocus(),
-            obscureText: obscureText,
-            decoration: InputDecoration(
-              enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(
-                    color: (isBordered ?? true)
-                        ? AppColors.white
-                        : Colors.transparent),
-                borderRadius: const BorderRadius.all(
-                  Radius.circular(10),
-                ),
+    return Container(
+      decoration: _isFocused
+          ? BoxDecoration(
+              border: Border.all(
+                color: AppColors.grey5D,
+                width: 5,
               ),
-              filled: true,
+              borderRadius: BorderRadius.circular(13))
+          : null,
+      height: widget.large ? 100.h : 52.r,
+      child: TextFormField(
+        focusNode: _focusNode,
+        // autofocus: true,
 
-              fillColor: AppColors.white.withOpacity(0.1),
-              border: OutlineInputBorder(
-                borderSide: BorderSide(
-                    color: (isBordered ?? true)
-                        ? Colors.transparent
-                        : AppColors.primary),
-                borderRadius: const BorderRadius.all(
-                  Radius.circular(10),
-                ),
-              ),
+        readOnly: widget.readonly,
+        style: AppStyles.semiBold15white.copyWith(fontSize: 16.r),
 
-              errorStyle: const TextStyle(
-                height: 0.05,
-                fontSize: 15,
-              ),
-              errorMaxLines: 2,
-              contentPadding:
-                  const EdgeInsets.symmetric(vertical: 19, horizontal: 13),
-
-              hintMaxLines: large ? 5 : 1,
-              hintStyle: TextStyle(color: Colors.grey[300], fontSize: 14),
-              prefixIcon: prefixIC != null
-                  ? large
-                      ? Padding(
-                          padding: const EdgeInsets.all(8),
-                          child: Align(
-                            alignment: Alignment.topRight,
-                            child: prefixIC,
-                          ),
-                        )
-                      : prefixIC
-                  : null,
-              prefixIconConstraints: large
-                  ? const BoxConstraints(
-                      maxWidth: 48,
-                      minWidth: 48,
-                      maxHeight: double.infinity,
-                      minHeight: 100,
-                    )
-                  : null,
-
-              // suffixIcon: suffixIC,
-              // suffixIconColor: AppColors.grey4A,
+        showCursor: !widget.readonly,
+        onTap: widget.onTap,
+        autovalidateMode: AutovalidateMode.onUserInteraction,
+        cursorColor: Theme.of(context).colorScheme.primary,
+        autocorrect: true,
+        keyboardType: widget.keyboardType,
+        controller: widget.controller,
+        minLines: widget.large ? 5 : 1,
+        maxLines: widget.large ? 5 : 1,
+        // onTapOutside: (event) => FocusScope.of(context).unfocus(),
+        obscureText: widget.obscureText,
+        decoration: InputDecoration(
+          focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                  color: (widget.isBordered ?? true)
+                      ? AppColors.white.withOpacity(0.8)
+                      : Colors.transparent),
+              borderRadius: const BorderRadius.all(
+                Radius.circular(8),
+              )),
+          enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+                color: (widget.isBordered ?? true)
+                    ? AppColors.white.withOpacity(0.32)
+                    : Colors.transparent),
+            borderRadius: const BorderRadius.all(
+              Radius.circular(8),
             ),
-            onChanged: onChanged,
           ),
+          filled: true,
+
+          fillColor: AppColors.white.withOpacity(0.1),
+          border: OutlineInputBorder(
+            borderSide: BorderSide(
+                color: (widget.isBordered ?? true)
+                    ? Colors.transparent
+                    : AppColors.white.withOpacity(0.8)),
+            borderRadius: const BorderRadius.all(
+              Radius.circular(8),
+            ),
+          ),
+
+          errorStyle: const TextStyle(
+            height: 0.05,
+            fontSize: 15,
+          ),
+          errorMaxLines: 2,
+          contentPadding:
+              const EdgeInsets.symmetric(vertical: 19, horizontal: 13),
+
+          hintMaxLines: widget.large ? 5 : 1,
+          hintStyle: TextStyle(color: Colors.grey[300], fontSize: 14),
+          prefixIcon: widget.prefixIC != null
+              ? widget.large
+                  ? Padding(
+                      padding: const EdgeInsets.all(8),
+                      child: Align(
+                        alignment: Alignment.topRight,
+                        child: widget.prefixIC,
+                      ),
+                    )
+                  : widget.prefixIC
+              : null,
+
+          prefixIconConstraints: widget.large
+              ? const BoxConstraints(
+                  maxWidth: 48,
+                  minWidth: 48,
+                  maxHeight: double.infinity,
+                  minHeight: 100,
+                )
+              : null,
+          suffixIconConstraints: widget.large
+              ? const BoxConstraints(
+                  maxWidth: 36,
+                  minWidth: 36,
+                  maxHeight: double.infinity,
+                  minHeight: 100,
+                )
+              : null,
+
+          suffixIcon: Padding(
+            padding: const EdgeInsets.only(right: 8, top: 3, bottom: 3),
+            child: widget.suffixIC,
+          ),
+          // suffixIconColor: AppColors.grey4A,
         ),
-      ],
+        onChanged: widget.onChanged,
+      ),
     );
   }
 }
