@@ -1,0 +1,7 @@
+flutter_native_splash:
+  image: assets/images/photos/logo_splash.png
+  # image_dark: assets/images/photos/splash_dark.png
+  color: "#343541" # This is the hex color code for white
+  # color_dark: "#161616"
+
+  # android_disable_fullscreen: true
