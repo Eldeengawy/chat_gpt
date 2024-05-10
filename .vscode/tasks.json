@@ -1,0 +1,162 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+            {
+            "label": "Reset Lib Folder",
+            "type": "shell",
+            "command": "Remove-Item -Recurse -Force lib",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": [],
+            // "dependsOn": "Copy Files"
+        },
+        {
+            "label": "Generate flutter template",
+            "type": "shell",
+            "command": "cp -r D:/flutter-projects/template/lib",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": [],
+            "dependsOn": "Reset Lib Folder"
+        },
+         {
+            "label": "Add General Packages",
+            "type": "shell",
+            "command": "flutter pub add intl logger file_picker equatable flutter_bloc flutter_svg flutter_screenutil flutter_spinkit easy_localization dio connectivity_plus json_annotation url_launcher permission_handler cached_network_image go_router pretty_dio_logger get_it",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Add Dev Dependencies",
+            "type": "shell",
+            "command": "flutter pub add --dev build_runner json_serializable",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": []
+        },
+         {
+            "label": "Generate Easy Localization with Keys",
+            "type": "shell",
+            "command": "dart",
+            "args": [
+                "run",
+                "easy_localization:generate",
+                "-S",
+                "assets/translations",
+                "-O",
+                "lib/core/translations",
+                "-f",
+                "keys",
+                "-o",
+                "locale_keys.g.dart"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Generate Easy Localization",
+            "type": "shell",
+            "command": "dart",
+            "args": [
+                "run",
+                "easy_localization:generate",
+                "-S",
+                "assets/translations",
+                "-O",
+                "lib/core/translations"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": []
+        },
+
+        {
+      "label": "Create Dart File",
+      "type": "shell",
+      "command": "${input:dartFileName}",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "presentation": {
+        "echo": false,
+        "reveal": "silent",
+        "focus": true,
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    },
+    {
+    "label": "Build Flutter APK",
+    "type": "shell",
+    "command": "flutter",
+    "args": ["build", "apk"],
+    "group": {
+        "kind": "build",
+        "isDefault": true
+    },
+    
+    },
+    {
+        "label": "Run Flutter App (Release)",
+        "type": "shell",
+        "command": "flutter",
+        "args": ["run", "--release"],
+        "group": {
+            "kind": "build",
+            "isDefault": true
+        }
+    },
+    {
+    "label": "Copy Git Diff to Clipboard",
+    "type": "shell",
+    "command": "git diff --cached | clip.exe",
+    "options": {
+        "env": {
+            "PATH": "${env:PATH};C:\\path\\to\\git\\bin" // Modify this path accordingly
+        }
+    },
+    "problemMatcher": []
+},
+ {
+            "label": "Run build_runner build",
+            "type": "shell",
+            "command": "dart",
+            "args": [
+                "run",
+                "build_runner",
+                "build"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "reveal": "silent",
+                "panel": "shared"
+            },
+            "problemMatcher": []
+        }
+  ],
+  "inputs": [
+    {
+      "id": "dartFileName",
+      "type": "promptString",
+      "description": "Enter the name of the Dart file:"
+    }
+    ]
+}
+
