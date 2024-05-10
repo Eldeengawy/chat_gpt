@@ -1,6 +1,9 @@
 // Import necessary packages and files
 import 'package:chat_gpt/config/routes/routes.dart';
 import 'package:chat_gpt/core/observers/router_observer.dart';
+import 'package:chat_gpt/features/chat/presentation/pages/new_chat_screen.dart';
+import 'package:chat_gpt/features/drawer/presentation/pages/drawer_screen.dart';
+import 'package:chat_gpt/features/on_boarding/presentation/pages/on_boading_screen.dart';
 import 'package:chat_gpt/features/splash/presentation/pages/splash.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -22,6 +25,25 @@ class AppRouter {
           // Return the SplashScreen widget
           return const SplashScreen();
         },
+      ),
+      GoRoute(
+        path: Routes.onBoarding,
+        builder: (context, state) {
+          return const OnBoardingScreen();
+        },
+      ),
+      GoRoute(
+        path: Routes.drawer,
+        builder: (context, state) {
+          return const DrawerScreen();
+        },
+      ),
+      GoRoute(
+        path: Routes.newChat,
+        pageBuilder: (_, state) => CustomSlideTransition(
+          key: state.pageKey,
+          child: const NewChatScreen(),
+        ),
       ),
     ],
   );
@@ -45,15 +67,18 @@ class AppRouter {
 class CustomSlideTransition extends CustomTransitionPage<void> {
   CustomSlideTransition({Key? key, required super.child})
       : super(
+          // key: key,
+          // child: child,
           transitionDuration: const Duration(milliseconds: 250),
           transitionsBuilder: (_, animation, __, child) {
             return SlideTransition(
-              position: animation.drive(
-                Tween(
-                  begin: const Offset(0, 1.5), // Start from bottom
-                  end: Offset.zero, // End at the top
-                ).chain(
-                  CurveTween(curve: Curves.ease),
+              position: Tween<Offset>(
+                begin: const Offset(1, 0), // Start from left
+                end: Offset.zero, // End at the center
+              ).animate(
+                CurvedAnimation(
+                  parent: animation,
+                  curve: Curves.ease,
                 ),
               ),
               child: child,

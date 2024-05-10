@@ -24,7 +24,7 @@ ThemeData lightTheme(BuildContext context) {
 
     //! AppBar Theme
     appBarTheme: const AppBarTheme(
-      backgroundColor: AppColors.white,
+      backgroundColor: AppColors.grey34,
       elevation: 0.0,
       centerTitle: true,
       iconTheme: IconThemeData(color: AppColors.white),
