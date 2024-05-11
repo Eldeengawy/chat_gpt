@@ -34,85 +34,94 @@ class _ExistingChatScreenState extends State<ExistingChatScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        leadingWidth: 200,
-        bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(4.0),
-          child: Container(
-            color: AppColors.white.withOpacity(0.4),
-            height: 1.0,
-          ),
-        ),
-        leading: GestureDetector(
-          onTap: () {
-            context.pop();
-          },
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Row(
-              children: [
-                const Icon(
-                  Icons.keyboard_arrow_left_rounded,
-                ),
-                12.pw,
-                Text(
-                  'Back',
-                  style: AppStyles.semiBold15white
-                      .copyWith(color: AppColors.white),
-                )
-              ],
+    return BlocProvider(
+      create: (BuildContext context) => ChatCubit(sl()),
+      child: Scaffold(
+        appBar: AppBar(
+          leadingWidth: 200,
+          bottom: PreferredSize(
+            preferredSize: const Size.fromHeight(4.0),
+            child: Container(
+              color: AppColors.white.withOpacity(0.4),
+              height: 1.0,
             ),
           ),
-        ),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: SvgPicture.asset(
-              AppIcons.logo,
-              height: 24,
+          leading: GestureDetector(
+            onTap: () {
+              context.pop();
+            },
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Row(
+                children: [
+                  const Icon(
+                    Icons.keyboard_arrow_left_rounded,
+                  ),
+                  12.pw,
+                  Text(
+                    'Back',
+                    style: AppStyles.semiBold15white
+                        .copyWith(color: AppColors.white),
+                  )
+                ],
+              ),
             ),
           ),
-        ],
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            if (messages.isEmpty) ...[
-              Expanded(
-                child: Center(
-                  child: Text(
-                    'Ask anything, get your answer',
-                    style: AppStyles.semiBold15white.copyWith(
-                      fontSize: 16.r,
-                      color: AppColors.white.withOpacity(0.4),
+          actions: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: SvgPicture.asset(
+                AppIcons.logo,
+                height: 24,
+              ),
+            ),
+          ],
+        ),
+        body: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              if (messages.isEmpty) ...[
+                Expanded(
+                  child: Center(
+                    child: Text(
+                      'Ask anything, get your answer',
+                      style: AppStyles.semiBold15white.copyWith(
+                        fontSize: 16.r,
+                        color: AppColors.white.withOpacity(0.4),
+                      ),
                     ),
                   ),
-                ),
-              )
-            ],
-            if (messages.isNotEmpty)
+                )
+              ],
+              if (messages.isNotEmpty)
 
-              // Your existing content here
-              Flexible(
-                child: ListView.builder(
-                  itemCount: messages.length,
-                  reverse: true,
-                  itemBuilder: (context, index) {
-                    return MessageWidget(
-                      message: messages[index],
-                    );
-                  },
+                // Your existing content here
+                Flexible(
+                  child: ListView.builder(
+                    itemCount: messages.length,
+                    reverse: true,
+                    itemBuilder: (context, index) {
+                      return BlocBuilder<ChatCubit, ChatState>(
+                        builder: (BuildContext context, ChatState state) =>
+                            MessageWidget(
+                          message: messages[index],
+                          chatId: widget.chat.id,
+                          onRegenerate: () {
+                            ChatCubit.get(context).regenerateAnswer(
+                                widget.chat.id, messages[index + 1]);
+                          },
+                          index: index,
+                        ),
+                      );
+                    },
+                  ),
                 ),
-              ),
-            // Add the TextFormField
-            CustomTextFormField(
-              controller: messageController,
-              suffixIC: BlocProvider(
-                create: (BuildContext context) => ChatCubit(sl()),
-                child: BlocConsumer<ChatCubit, ChatState>(
+              // Add the TextFormField
+              CustomTextFormField(
+                controller: messageController,
+                suffixIC: BlocConsumer<ChatCubit, ChatState>(
                   builder: (BuildContext context, ChatState state) =>
                       CustomIconButton(
                     color: AppColors.primary,
@@ -144,8 +153,8 @@ class _ExistingChatScreenState extends State<ExistingChatScreen> {
                   },
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

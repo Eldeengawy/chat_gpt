@@ -107,8 +107,20 @@ class _NewChatScreenState extends State<NewChatScreen> {
                   itemCount: messages.length,
                   reverse: true,
                   itemBuilder: (context, index) {
-                    return MessageWidget(
-                      message: messages[index],
+                    return BlocProvider(
+                      create: (BuildContext context) => ChatCubit(sl()),
+                      child: BlocBuilder<ChatCubit, ChatState>(
+                        builder: (BuildContext context, ChatState state) =>
+                            MessageWidget(
+                          message: messages[index],
+                          chatId: chatId,
+                          onRegenerate: () {
+                            ChatCubit.get(context)
+                                .regenerateAnswer(chatId, messages[index + 1]);
+                          },
+                          index: index,
+                        ),
+                      ),
                     );
                   },
                 ),

@@ -6,4 +6,5 @@ abstract class ChatsLocalDataSource {
   Future<List<Chat>> getChats();
   Future<void> deleteChat(String chatId);
   Future<void> deleteAllChats();
+  Future<void> removeLastMessage(String chatId);
 }

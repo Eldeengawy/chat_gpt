@@ -1,4 +1,5 @@
 import 'package:chat_gpt/core/extensions/sized_box.dart';
+import 'package:chat_gpt/core/functions/copy_text_to_clipboard.dart';
 import 'package:chat_gpt/core/static/app_styles.dart';
 import 'package:chat_gpt/core/static/icons.dart';
 import 'package:chat_gpt/core/theme/colors.dart';
@@ -9,8 +10,16 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 class MessageWidget extends StatelessWidget {
   final Message message;
+  final String chatId;
+  final void Function()? onRegenerate;
+  final int index;
 
-  const MessageWidget({super.key, required this.message});
+  const MessageWidget(
+      {super.key,
+      required this.message,
+      required this.chatId,
+      this.onRegenerate,
+      required this.index});
 
   @override
   Widget build(BuildContext context) {
@@ -68,25 +77,61 @@ class MessageWidget extends StatelessWidget {
                         AppColors.white.withOpacity(0.4), BlendMode.srcIn),
                   ),
                   40.pw,
-                  Row(
-                    children: [
-                      SvgPicture.asset(
-                        AppIcons.copy,
-                        colorFilter: ColorFilter.mode(
-                            AppColors.white.withOpacity(0.4), BlendMode.srcIn),
-                      ),
-                      12.pw,
-                      Text(
-                        'copy',
-                        style: AppStyles.semiBold15white.copyWith(
-                          fontSize: 14.r,
-                          color: AppColors.white.withOpacity(0.4),
+                  GestureDetector(
+                    onTap: () {
+                      copyToClipboard(context, message.text);
+                    },
+                    child: Row(
+                      children: [
+                        SvgPicture.asset(
+                          AppIcons.copy,
+                          colorFilter: ColorFilter.mode(
+                              AppColors.white.withOpacity(0.4),
+                              BlendMode.srcIn),
                         ),
-                      )
-                    ],
+                        12.pw,
+                        Text(
+                          'copy',
+                          style: AppStyles.semiBold15white.copyWith(
+                            fontSize: 14.r,
+                            color: AppColors.white.withOpacity(0.4),
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 ],
               ),
+              if (index == 0) ...[
+                40.ph,
+                GestureDetector(
+                  onTap: onRegenerate,
+                  child: Center(
+                      child: Container(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 13, vertical: 7),
+                    decoration: BoxDecoration(
+                      color: AppColors.black20,
+                      borderRadius: BorderRadius.circular(4),
+                      border: Border.all(
+                        color: AppColors.white.withOpacity(0.2),
+                      ),
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        SvgPicture.asset(AppIcons.regenerate),
+                        10.pw,
+                        Text(
+                          'Regenerate response',
+                          style:
+                              AppStyles.medium12white.copyWith(fontSize: 14.r),
+                        ),
+                      ],
+                    ),
+                  )),
+                )
+              ]
             ]
           ],
         ),

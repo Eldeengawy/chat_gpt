@@ -57,4 +57,9 @@ class ChatsRepoImpl implements ChatsRepo {
   Future<void> deleteChat(String chatId) async {
     return await _localDataSource.deleteChat(chatId);
   }
+
+  @override
+  Future<void> removeLastMessage(String chatId) async {
+    return await _localDataSource.removeLastMessage(chatId);
+  }
 }

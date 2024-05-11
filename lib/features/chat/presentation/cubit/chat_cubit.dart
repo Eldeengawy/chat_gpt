@@ -16,7 +16,7 @@ class ChatCubit extends Cubit<ChatState> {
       emit(ChatSendingMessage());
 
       // Attempt to send the message
-      Message botMessage =  await chatsRepo.sendMessage(message, chatId);
+      Message botMessage = await chatsRepo.sendMessage(message, chatId);
 
       // If successful, emit success event
       emit(ChatSendMessageSuccess(botMessage));
@@ -24,5 +24,14 @@ class ChatCubit extends Cubit<ChatState> {
       // If an error occurs, emit an error event
       emit(ChatSendMessageFailure(error.toString()));
     }
+  }
+
+  // Function to remove last two messages and resend the last one
+  Future<void> regenerateAnswer(String chatId, Message message) async {
+    emit(ChatSendingMessage());
+    try {
+      await chatsRepo.removeLastMessage(chatId);
+      sendMessage(message, chatId);
+    } catch (e) {}
   }
 }

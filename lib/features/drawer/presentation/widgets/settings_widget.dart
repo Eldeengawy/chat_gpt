@@ -50,10 +50,14 @@ class SettingsWidget extends StatelessWidget {
               context.push(Routes.faqScreen);
             },
           ),
-          const SettingsItem(
+          SettingsItem(
             title: 'Logout',
             icon: AppIcons.logout,
             color: AppColors.redED,
+            onTap: () async {
+              await DrawerCubit.get(context).deleteAllChats();
+              context.pushReplacement(Routes.onBoarding);
+            },
           ),
         ],
       ),

@@ -64,4 +64,25 @@ class ChatsLocalDataSourceImpl implements ChatsLocalDataSource {
       log('No existing chat');
     }
   }
+
+  @override
+  Future<void> removeLastMessage(String chatId) async {
+    final chatBox = Hive.box(Constants.KChatBox);
+    final Chat? existingChat = chatBox.values.firstWhere(
+      (element) => element.id == chatId,
+      orElse: () {
+        log('No existing chat');
+        return null;
+      },
+    );
+
+    if (existingChat != null && existingChat.messages.isNotEmpty) {
+      // Remove the last message
+      existingChat.messages.removeLast();
+      // Save the chat
+      await existingChat.save();
+    } else {
+      log('No existing chat or no messages to remove');
+    }
+  }
 }
