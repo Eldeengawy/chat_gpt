@@ -1,4 +1,5 @@
-### 🚀 ChatGPT App Features
+<!-- Features -->
+<h2 align="center"> 🚀 ChatGPT App Features</h2>
 
 1. **Create New Chat**: 
    - Initiate conversations with ChatGPT on various topics.
@@ -16,22 +17,33 @@
    - Clear all chat history with a single tap.
    - Keep your chat interface organized by removing old conversations.
 
-### 💡 Technologies Used
 
-The ChatGPT app is developed using these technologies:
+<!-- Project Screenshots -->
+<h2 align="center">📸 Project Screenshots 📸</h2>
+<p align="center">
+   <img src="assets/images/photos/1.png" alt="Screenshot 1" width="100">
+    <img src="assets/images/photos/2.png" alt="Screenshot 2" width="100">
+    <img src="assets/images/photos/3.png" alt="Screenshot 3" width="100">
+    <img src="assets/images/photos/4.png" alt="Screenshot 4" width="100">
+    <img src="assets/images/photos/5.png" alt="Screenshot 5" width="100">
+    <img src="assets/images/photos/6.png" alt="Screenshot 6" width="100">
+    <img src="assets/images/photos/7.png" alt="Screenshot 7" width="100">
+    <img src="assets/images/photos/8.png" alt="Screenshot 8" width="100">
+    <img src="assets/images/photos/9.png" alt="Screenshot 9" width="100">
+    <img src="assets/images/photos/10.png" alt="Screenshot 10" width="100">
+    <img src="assets/images/photos/11.png" alt="Screenshot 11" width="100">
+  <!-- Add more screenshots... -->
+</p>
 
-- **Dart & Flutter**: For building the user interface and functionality.
-- **BloC State Management**: Utilized for efficient state management within the app.
-- **Hive Local Database**: Stores chat history efficiently using local storage.
+<!-- Technologies Used -->
+<h2 align="center">💡 Technologies Used</h2>
+<p align="center">Built using cutting-edge technologies:</p>
 
-### 📸 ChatGPT App Screenshots
-
-*Imagine if there were a slider here to view different chat screens*
-
-- **Chat with ChatGPT**:
-  - [Screenshot 1](assets/Screenshots/chat_1.png): Engaging conversation with ChatGPT about Flutter.
-  - [Screenshot 2](assets/Screenshots/chat_2.png): Discussing advanced Flutter state management techniques.
-  - [Screenshot 3](assets/Screenshots/chat_3.png): Exploring Dart language features with ChatGPT.
-
+<ul>
+  <li>Dart & Flutter</li>
+  <li>Hive Local Database</li>
+  <li>BloC State Management</li>
+  <!-- Add more technologies... -->
+</ul>
 
 With the ChatGPT app, you can have productive discussions, clear clutter with ease, and keep your conversations organized.
