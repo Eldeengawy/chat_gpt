@@ -18,4 +18,5 @@ class AppIcons {
   static const String send = '$_iconsPath/send_ic.svg';
   static const String trash = '$_iconsPath/trash_ic.svg';
   static const String updates = '$_iconsPath/update_ic.svg';
+  static const String menu = '$_iconsPath/menu_ic.svg';
 }

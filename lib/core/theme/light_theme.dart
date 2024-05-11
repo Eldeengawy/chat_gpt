@@ -14,9 +14,9 @@ ThemeData lightTheme(BuildContext context) {
     // useMaterial3: false,
     scaffoldBackgroundColor: AppColors.grey34,
     fontFamily: Constants.fontFamily,
-    colorScheme: const ColorScheme.light(
-      primary: AppColors.primary,
-    ),
+    // colorScheme: const ColorScheme.light(
+    //   primary: AppColors.primary,
+    // ),
 
     dividerColor: AppColors.white.withOpacity(0.4),
     dividerTheme: DividerThemeData(

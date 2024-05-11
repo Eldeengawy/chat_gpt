@@ -1,4 +1,3 @@
-import 'package:chat_gpt/core/api/response/response.dart';
 import 'package:chat_gpt/core/errors/app_exception.dart';
 import 'package:chat_gpt/core/translations/locale_keys.g.dart';
 import 'package:easy_localization/easy_localization.dart';

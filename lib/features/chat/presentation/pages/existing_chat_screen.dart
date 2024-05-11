@@ -1,6 +1,3 @@
-import 'dart:developer';
-
-import 'package:chat_gpt/config/routes/routes.dart';
 import 'package:chat_gpt/core/extensions/sized_box.dart';
 import 'package:chat_gpt/core/services/di.dart';
 import 'package:chat_gpt/core/static/app_styles.dart';
@@ -11,29 +8,27 @@ import 'package:chat_gpt/core/utils/widgets/inputs/custom_form_field.dart';
 import 'package:chat_gpt/features/chat/data/models/message.dart';
 import 'package:chat_gpt/features/chat/presentation/cubit/chat_cubit.dart';
 import 'package:chat_gpt/features/chat/presentation/widgets/message_widget.dart';
+import 'package:chat_gpt/features/drawer/data/models/chat.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
-import 'package:uuid/uuid.dart';
 
-class NewChatScreen extends StatefulWidget {
-  const NewChatScreen({super.key});
+class ExistingChatScreen extends StatefulWidget {
+  final Chat chat;
+  const ExistingChatScreen({super.key, required this.chat});
 
   @override
-  State<NewChatScreen> createState() => _NewChatScreenState();
+  State<ExistingChatScreen> createState() => _ExistingChatScreenState();
 }
 
-class _NewChatScreenState extends State<NewChatScreen> {
+class _ExistingChatScreenState extends State<ExistingChatScreen> {
   List<Message> messages = [];
   TextEditingController messageController = TextEditingController();
-  late String chatId;
-
   @override
   void initState() {
-    // Generate a random chat ID
-    chatId = const Uuid().v4();
+    messages = widget.chat.messages.reversed.toList();
     super.initState();
   }
 
@@ -51,8 +46,7 @@ class _NewChatScreenState extends State<NewChatScreen> {
         ),
         leading: GestureDetector(
           onTap: () {
-            // context.go(Routes.drawer);
-            context.pushReplacement(Routes.drawer);
+            context.pop();
           },
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -127,13 +121,12 @@ class _NewChatScreenState extends State<NewChatScreen> {
                       final message = messageController.text;
                       messageController.clear();
                       setState(() {
-                        log(chatId);
                         messages.insert(0,
                             Message(text: message, isSentByMe: true, id: '0'));
                       });
                       ChatCubit.get(context).sendMessage(
                           Message(id: '0', text: message, isSentByMe: true),
-                          chatId);
+                          widget.chat.id);
                     },
                   ),
                   listener: (BuildContext context, ChatState state) {

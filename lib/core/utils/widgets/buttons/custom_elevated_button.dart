@@ -81,7 +81,7 @@ class CustomElevatedButton extends StatelessWidget {
     this.icon,
     this.iconColor = AppColors.white,
     this.backgroundColor = AppColors.primary,
-    this.textColor,
+    this.textColor = AppColors.white,
     this.loading = false,
     this.boldTitle = false,
   });
@@ -122,7 +122,8 @@ class CustomElevatedButton extends StatelessWidget {
                           title.tr(),
                           textAlign: TextAlign.center,
                           // textScaleFactor: 0.5,
-                          style: AppStyles.bold18white,
+                          style:
+                              AppStyles.bold18white.copyWith(color: textColor),
                         ),
                       ),
                       if (icon != null) ...[

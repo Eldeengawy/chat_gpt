@@ -1,20 +1,25 @@
-import 'package:chat_gpt/core/static/icons.dart';
 import 'package:chat_gpt/core/theme/colors.dart';
+import 'package:chat_gpt/features/drawer/presentation/widgets/chats_history.dart';
 import 'package:chat_gpt/features/drawer/presentation/widgets/new_chat_widget.dart';
-import 'package:chat_gpt/features/drawer/presentation/widgets/settings_item.dart';
+import 'package:chat_gpt/features/drawer/presentation/widgets/settings_widget.dart';
 import 'package:flutter/material.dart';
 
-class DrawerScreen extends StatelessWidget {
+class DrawerScreen extends StatefulWidget {
   const DrawerScreen({super.key});
 
   @override
+  State<DrawerScreen> createState() => _DrawerScreenState();
+}
+
+class _DrawerScreenState extends State<DrawerScreen> {
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       backgroundColor: AppColors.black20,
       body: SafeArea(
         child: Column(
           children: [
-            const Padding(
+            Padding(
               padding: EdgeInsets.symmetric(horizontal: 20),
               child: Column(
                 children: [
@@ -22,43 +27,10 @@ class DrawerScreen extends StatelessWidget {
                 ],
               ),
             ),
-            const Spacer(),
-            Container(
-              padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 20),
-              decoration: BoxDecoration(
-                border: Border(
-                  top: BorderSide(
-                    color: AppColors.white.withOpacity(0.4),
-                  ),
-                ),
-              ),
-              child: const Column(
-                children: [
-                  SettingsItem(
-                    title: 'Clear conversations',
-                    icon: AppIcons.trash,
-                  ),
-                  SettingsItem(
-                    title: 'Upgrade to plus',
-                    icon: AppIcons.person,
-                    isNew: true,
-                  ),
-                  SettingsItem(
-                    title: 'Light mode',
-                    icon: AppIcons.lightMode,
-                  ),
-                  SettingsItem(
-                    title: 'Updates & FAQ',
-                    icon: AppIcons.updates,
-                  ),
-                  SettingsItem(
-                    title: 'Logout',
-                    icon: AppIcons.logout,
-                    color: AppColors.redED,
-                  ),
-                ],
-              ),
+            Expanded(
+              child: ChatsHistoryWidget(),
             ),
+            SettingsWidget(),
           ],
         ),
       ),

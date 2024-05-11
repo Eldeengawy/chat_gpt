@@ -1,11 +1,18 @@
 // Import necessary packages and files
 import 'package:chat_gpt/config/routes/routes.dart';
 import 'package:chat_gpt/core/observers/router_observer.dart';
+import 'package:chat_gpt/core/services/di.dart';
+import 'package:chat_gpt/features/chat/presentation/pages/existing_chat_screen.dart';
 import 'package:chat_gpt/features/chat/presentation/pages/new_chat_screen.dart';
+import 'package:chat_gpt/features/drawer/data/models/chat.dart';
+import 'package:chat_gpt/features/drawer/presentation/cubit/drawer_cubit.dart';
 import 'package:chat_gpt/features/drawer/presentation/pages/drawer_screen.dart';
+import 'package:chat_gpt/features/drawer/presentation/pages/faq_screen.dart';
 import 'package:chat_gpt/features/on_boarding/presentation/pages/on_boading_screen.dart';
 import 'package:chat_gpt/features/splash/presentation/pages/splash.dart';
+import 'package:chat_gpt/features/upgrade_to_plus/presentation/pages/upgrade_to_plus_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 // Define the AppRouter class
@@ -35,7 +42,9 @@ class AppRouter {
       GoRoute(
         path: Routes.drawer,
         builder: (context, state) {
-          return const DrawerScreen();
+          return BlocProvider(
+              create: (BuildContext context) => DrawerCubit(sl())..getChats(),
+              child: const DrawerScreen());
         },
       ),
       GoRoute(
@@ -43,6 +52,29 @@ class AppRouter {
         pageBuilder: (_, state) => CustomSlideTransition(
           key: state.pageKey,
           child: const NewChatScreen(),
+        ),
+      ),
+      GoRoute(
+        path: Routes.existingChat,
+        pageBuilder: (_, state) => CustomSlideTransition(
+          key: state.pageKey,
+          child: ExistingChatScreen(
+            chat: state.extra as Chat,
+          ),
+        ),
+      ),
+      GoRoute(
+        path: Routes.upgradeToPlus,
+        pageBuilder: (_, state) => CustomSlideTransition(
+          key: state.pageKey,
+          child: const UpgradeToPlusScreen(),
+        ),
+      ),
+      GoRoute(
+        path: Routes.faqScreen,
+        pageBuilder: (_, state) => CustomSlideTransition(
+          key: state.pageKey,
+          child: const FAQScreen(),
         ),
       ),
     ],
