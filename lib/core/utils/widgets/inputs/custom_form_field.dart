@@ -1,3 +1,4 @@
+import 'package:chat_gpt/core/functions/is_dark.dart';
 import 'package:chat_gpt/core/static/app_styles.dart';
 import 'package:chat_gpt/core/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -69,7 +70,8 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
       decoration: _isFocused
           ? BoxDecoration(
               border: Border.all(
-                color: AppColors.grey5D,
+                color:
+                    isDarkMode(context) ? AppColors.grey5D : AppColors.black20,
                 width: 5,
               ),
               borderRadius: BorderRadius.circular(13))
@@ -80,7 +82,9 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         // autofocus: true,
 
         readOnly: widget.readonly,
-        style: AppStyles.semiBold15white.copyWith(fontSize: 16.r),
+        style: AppStyles.semiBold15white.copyWith(
+            fontSize: 16.r,
+            color: isDarkMode(context) ? AppColors.white : AppColors.black),
 
         showCursor: !widget.readonly,
         onTap: widget.onTap,
@@ -97,7 +101,9 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
           focusedBorder: OutlineInputBorder(
               borderSide: BorderSide(
                   color: (widget.isBordered ?? true)
-                      ? AppColors.white.withOpacity(0.8)
+                      ? isDarkMode(context)
+                          ? AppColors.white.withOpacity(0.8)
+                          : AppColors.black.withOpacity(0.8)
                       : Colors.transparent),
               borderRadius: const BorderRadius.all(
                 Radius.circular(8),
@@ -105,7 +111,9 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
           enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(
                 color: (widget.isBordered ?? true)
-                    ? AppColors.white.withOpacity(0.32)
+                    ? isDarkMode(context)
+                        ? AppColors.white.withOpacity(0.32)
+                        : AppColors.black.withOpacity(0.32)
                     : Colors.transparent),
             borderRadius: const BorderRadius.all(
               Radius.circular(8),
@@ -113,7 +121,9 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
           ),
           filled: true,
 
-          fillColor: AppColors.white.withOpacity(0.1),
+          fillColor: isDarkMode(context)
+              ? AppColors.white.withOpacity(0.1)
+              : AppColors.black.withOpacity(0.1),
           border: OutlineInputBorder(
             borderSide: BorderSide(
                 color: (widget.isBordered ?? true)
@@ -130,7 +140,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
           ),
           errorMaxLines: 2,
           contentPadding:
-              const EdgeInsets.symmetric(vertical: 19, horizontal: 13),
+              const EdgeInsets.symmetric(vertical: 0, horizontal: 13),
 
           hintMaxLines: widget.large ? 5 : 1,
           hintStyle: TextStyle(color: Colors.grey[300], fontSize: 14),

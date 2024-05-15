@@ -4,17 +4,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-ThemeData lightTheme(BuildContext context) {
+ThemeData darkTheme(BuildContext context) {
   return ThemeData(
-    brightness: Brightness.light,
+    brightness: Brightness.dark,
     primaryColor: AppColors.primary,
     // primaryColorLight: AppColors.primaryLight,
     // primaryColorDark: AppColors.primaryDark,
     //this may be changed in the future
     // useMaterial3: false,
-    scaffoldBackgroundColor: AppColors.white,
+    scaffoldBackgroundColor: AppColors.grey34,
     fontFamily: Constants.fontFamily,
-    // colorScheme: const ColorScheme.light(
+    // colorScheme: const ColorScheme.dark(
     //     // primary: AppColors.primary,
     //     ),
 
@@ -24,11 +24,10 @@ ThemeData lightTheme(BuildContext context) {
 
     //! AppBar Theme
     appBarTheme: const AppBarTheme(
-      backgroundColor: Colors.transparent,
-      foregroundColor: AppColors.black,
+      backgroundColor: AppColors.grey34,
       elevation: 0.0,
       centerTitle: true,
-      iconTheme: IconThemeData(color: AppColors.black),
+      iconTheme: IconThemeData(color: AppColors.white),
       systemOverlayStyle: SystemUiOverlayStyle(
         statusBarBrightness: Brightness.light,
         statusBarIconBrightness: Brightness.dark,
@@ -118,44 +117,44 @@ TextTheme textTheme() {
     //   fontSize: 35.sp,
     //   fontStyle: FontStyle.normal,
     //   fontWeight: FontWeight.w900,
-    //   color: AppColors.black,
+    //   color: AppColors.white,
     // ),
     bodyLarge: TextStyle(
       fontSize: 16.sp,
       fontStyle: FontStyle.normal,
       fontWeight: FontWeight.w600,
-      color: AppColors.black,
+      color: AppColors.white,
     ),
     bodyMedium: TextStyle(
       fontSize: 16.sp,
       fontStyle: FontStyle.normal,
       fontWeight: FontWeight.w600,
-      color: AppColors.black,
+      color: AppColors.white,
     ),
     bodySmall: TextStyle(
       fontSize: 14.sp,
       fontStyle: FontStyle.normal,
       fontWeight: FontWeight.w400,
-      color: AppColors.black,
+      color: AppColors.white,
     ),
     //! DISPLAY
     displayLarge: TextStyle(
       fontSize: 20.sp,
       fontStyle: FontStyle.normal,
       fontWeight: FontWeight.w700,
-      color: AppColors.black,
+      color: AppColors.white,
     ),
     displayMedium: TextStyle(
       fontSize: 16.sp,
       fontStyle: FontStyle.normal,
       fontWeight: FontWeight.w600,
-      color: AppColors.black,
+      color: AppColors.white,
     ),
     displaySmall: TextStyle(
       fontSize: 14.sp,
       fontStyle: FontStyle.normal,
       fontWeight: FontWeight.w400,
-      color: AppColors.black,
+      color: AppColors.white,
     ),
     //! HEADLINE
     headlineLarge: TextStyle(
@@ -163,51 +162,51 @@ TextTheme textTheme() {
       // fontSize: 20.sp,
       fontStyle: FontStyle.normal,
       fontWeight: FontWeight.bold,
-      color: AppColors.black,
+      color: AppColors.white,
     ),
     headlineMedium: TextStyle(
       fontSize: 16.sp,
       fontStyle: FontStyle.normal,
       fontWeight: FontWeight.w600,
-      color: AppColors.black,
+      color: AppColors.white,
     ),
     headlineSmall: TextStyle(
       fontSize: 14.sp,
       fontStyle: FontStyle.normal,
       fontWeight: FontWeight.w400,
-      color: AppColors.black,
+      color: AppColors.white,
     ),
     //! LABEL
     labelLarge: TextStyle(
       fontSize: 16.sp,
       fontStyle: FontStyle.normal,
       fontWeight: FontWeight.w500,
-      color: AppColors.black,
+      color: AppColors.white,
     ),
     labelMedium: TextStyle(
       fontSize: 14.sp,
       fontStyle: FontStyle.normal,
       fontWeight: FontWeight.w400,
-      color: AppColors.black,
+      color: AppColors.white,
     ),
     labelSmall: TextStyle(
       fontSize: 12.sp,
       fontStyle: FontStyle.normal,
       fontWeight: FontWeight.w300,
-      color: AppColors.black,
+      color: AppColors.white,
     ),
     titleLarge: TextStyle(
       fontSize: 20.sp,
       fontStyle: FontStyle.normal,
       fontWeight: FontWeight.w700,
-      color: AppColors.black,
+      color: AppColors.white,
     ),
 
     titleMedium: TextStyle(
       fontSize: 16.sp,
       fontStyle: FontStyle.normal,
       fontWeight: FontWeight.w600,
-      color: AppColors.black,
+      color: AppColors.white,
     ),
     titleSmall: TextStyle(
       fontSize: 14.sp,

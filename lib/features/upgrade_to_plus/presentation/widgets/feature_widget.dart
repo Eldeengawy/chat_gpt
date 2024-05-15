@@ -1,4 +1,5 @@
 import 'package:chat_gpt/core/extensions/sized_box.dart';
+import 'package:chat_gpt/core/functions/is_dark.dart';
 import 'package:chat_gpt/core/static/app_styles.dart';
 import 'package:flutter/material.dart';
 
@@ -16,15 +17,16 @@ class FeatureWidget extends StatelessWidget {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Icon(
+        Icon(
           Icons.check_circle_outline_rounded,
-          color: AppColors.white,
+          color: isDarkMode(context) ? AppColors.white : AppColors.black,
         ),
         20.pw,
         Expanded(
           child: Text(
             title,
-            style: AppStyles.medium16white,
+            style: AppStyles.medium16white.copyWith(
+                color: isDarkMode(context) ? AppColors.white : AppColors.black),
           ),
         ),
       ],

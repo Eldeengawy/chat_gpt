@@ -1,5 +1,6 @@
 import 'package:chat_gpt/core/extensions/sized_box.dart';
 import 'package:chat_gpt/core/functions/copy_text_to_clipboard.dart';
+import 'package:chat_gpt/core/functions/is_dark.dart';
 import 'package:chat_gpt/core/static/app_styles.dart';
 import 'package:chat_gpt/core/static/icons.dart';
 import 'package:chat_gpt/core/theme/colors.dart';
@@ -68,13 +69,19 @@ class MessageWidget extends StatelessWidget {
                   SvgPicture.asset(
                     AppIcons.like,
                     colorFilter: ColorFilter.mode(
-                        AppColors.white.withOpacity(0.4), BlendMode.srcIn),
+                        isDarkMode(context)
+                            ? AppColors.white.withOpacity(0.4)
+                            : AppColors.black.withOpacity(0.4),
+                        BlendMode.srcIn),
                   ),
                   18.pw,
                   SvgPicture.asset(
                     AppIcons.dislike,
                     colorFilter: ColorFilter.mode(
-                        AppColors.white.withOpacity(0.4), BlendMode.srcIn),
+                        isDarkMode(context)
+                            ? AppColors.white.withOpacity(0.4)
+                            : AppColors.black.withOpacity(0.4),
+                        BlendMode.srcIn),
                   ),
                   40.pw,
                   GestureDetector(
@@ -86,7 +93,9 @@ class MessageWidget extends StatelessWidget {
                         SvgPicture.asset(
                           AppIcons.copy,
                           colorFilter: ColorFilter.mode(
-                              AppColors.white.withOpacity(0.4),
+                              isDarkMode(context)
+                                  ? AppColors.white.withOpacity(0.4)
+                                  : AppColors.black.withOpacity(0.4),
                               BlendMode.srcIn),
                         ),
                         12.pw,
@@ -94,7 +103,9 @@ class MessageWidget extends StatelessWidget {
                           'copy',
                           style: AppStyles.semiBold15white.copyWith(
                             fontSize: 14.r,
-                            color: AppColors.white.withOpacity(0.4),
+                            color: isDarkMode(context)
+                                ? AppColors.white.withOpacity(0.4)
+                                : AppColors.black.withOpacity(0.4),
                           ),
                         )
                       ],

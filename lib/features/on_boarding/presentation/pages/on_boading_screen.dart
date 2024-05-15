@@ -1,7 +1,9 @@
 import 'package:chat_gpt/config/routes/routes.dart';
 import 'package:chat_gpt/core/extensions/sized_box.dart';
+import 'package:chat_gpt/core/functions/is_dark.dart';
 import 'package:chat_gpt/core/static/app_styles.dart';
 import 'package:chat_gpt/core/static/icons.dart';
+import 'package:chat_gpt/core/theme/colors.dart';
 import 'package:chat_gpt/core/utils/widgets/buttons/custom_elevated_button.dart';
 import 'package:chat_gpt/features/on_boarding/presentation/widgets/capabilities_widget.dart';
 import 'package:chat_gpt/features/on_boarding/presentation/widgets/examples_widget.dart';
@@ -43,20 +45,28 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                 child: SvgPicture.asset(
                   AppIcons.logo,
                   height: 24,
+                  colorFilter: ColorFilter.mode(
+                      isDarkMode(context) ? AppColors.white : AppColors.black,
+                      BlendMode.srcIn),
                 ),
               ),
               24.ph,
               Text(
                 'Welcome to\nChatGPT',
-                style: AppStyles.bold32white,
+                style: AppStyles.bold32white.copyWith(
+                    color: isDarkMode(context)
+                        ? AppColors.white
+                        : AppColors.black),
                 textAlign: TextAlign.center,
               ),
               24.ph,
               Text(
                 'Ask anything, get your answer',
                 style: AppStyles.semiBold15white.copyWith(
-                  fontSize: 16.r,
-                ),
+                    fontSize: 16.r,
+                    color: isDarkMode(context)
+                        ? AppColors.white
+                        : AppColors.black),
                 textAlign: TextAlign.center,
               ),
               60.ph,

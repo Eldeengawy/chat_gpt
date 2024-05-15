@@ -41,6 +41,7 @@ class AppRouter {
       ),
       GoRoute(
         path: Routes.drawer,
+        name: Routes.drawer,
         builder: (context, state) {
           return BlocProvider(
               create: (BuildContext context) => DrawerCubit(sl())..getChats(),

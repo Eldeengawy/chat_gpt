@@ -17,6 +17,7 @@ Future<void> main() async {
   // Initialize the dependency injection container
   // final appDocumentDir = await path_provider.getApplicationDocumentsDirectory();
   await Hive.initFlutter();
+  // await ThemeManager.init();
 
   // Register Hive Adapters
   Hive.registerAdapter(ChatAdapter());

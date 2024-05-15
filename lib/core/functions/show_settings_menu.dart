@@ -1,4 +1,5 @@
 import 'package:chat_gpt/core/extensions/sized_box.dart';
+import 'package:chat_gpt/core/functions/is_dark.dart';
 import 'package:chat_gpt/core/static/app_styles.dart';
 import 'package:chat_gpt/core/static/icons.dart';
 import 'package:chat_gpt/core/theme/colors.dart';
@@ -24,7 +25,7 @@ void showSettingsMenu(
   );
 
   showMenu(
-    color: AppColors.grey34,
+    color: isDarkMode(context) ? AppColors.grey34 : AppColors.white,
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.all(
         Radius.circular(10.0.r),
@@ -41,13 +42,16 @@ void showSettingsMenu(
               AppIcons.edit,
               width: 16.r,
               height: 16.r,
-              colorFilter:
-                  const ColorFilter.mode(AppColors.white, BlendMode.srcIn),
+              colorFilter: ColorFilter.mode(
+                  isDarkMode(context) ? AppColors.white : AppColors.black,
+                  BlendMode.srcIn),
             ),
             10.pw,
             Text(
               'Edit',
-              style: AppStyles.medium12white,
+              style: AppStyles.medium12white.copyWith(
+                  color:
+                      isDarkMode(context) ? AppColors.white : AppColors.black),
             ),
           ],
         ),

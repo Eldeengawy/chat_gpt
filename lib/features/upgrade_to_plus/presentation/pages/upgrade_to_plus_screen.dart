@@ -1,4 +1,5 @@
 import 'package:chat_gpt/core/extensions/sized_box.dart';
+import 'package:chat_gpt/core/functions/is_dark.dart';
 import 'package:chat_gpt/core/static/app_styles.dart';
 import 'package:chat_gpt/core/theme/colors.dart';
 import 'package:chat_gpt/core/utils/widgets/buttons/custom_elevated_button.dart';
@@ -11,10 +12,10 @@ class UpgradeToPlusScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.black10,
-      appBar: AppBar(
-        backgroundColor: AppColors.black10,
-      ),
+      backgroundColor: isDarkMode(context)
+          ? AppColors.black10
+          : AppColors.white.withOpacity(0.9),
+      appBar: AppBar(backgroundColor: Colors.transparent),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Column(
@@ -23,12 +24,16 @@ class UpgradeToPlusScreen extends StatelessWidget {
           children: [
             Text(
               'ChatGPT Plus',
-              style: AppStyles.bold32white,
+              style: AppStyles.bold32white.copyWith(
+                  color:
+                      isDarkMode(context) ? AppColors.white : AppColors.black),
             ),
             5.ph,
             Text(
               'Access out most powerful model and advanced features',
-              style: AppStyles.medium16white,
+              style: AppStyles.medium16white.copyWith(
+                  color:
+                      isDarkMode(context) ? AppColors.white : AppColors.black),
             ),
             30.ph,
             const FeatureWidget(
@@ -54,11 +59,16 @@ class UpgradeToPlusScreen extends StatelessWidget {
                 children: [
                   Text(
                     'Auto-renews for EGP 699.99/month until canceled',
-                    style: AppStyles.semiBold12white,
+                    style: AppStyles.semiBold12white.copyWith(
+                        color: isDarkMode(context)
+                            ? AppColors.white
+                            : AppColors.black),
                   ),
                   CustomElevatedButton(
-                    backgroundColor: AppColors.white,
-                    textColor: AppColors.black,
+                    backgroundColor:
+                        isDarkMode(context) ? AppColors.white : AppColors.black,
+                    textColor:
+                        isDarkMode(context) ? AppColors.black : AppColors.white,
                     title: 'Subscribe',
                     onPressed: () {},
                   ),

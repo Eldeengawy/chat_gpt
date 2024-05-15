@@ -1,3 +1,4 @@
+import 'package:chat_gpt/core/functions/is_dark.dart';
 import 'package:chat_gpt/core/theme/colors.dart';
 import 'package:chat_gpt/features/drawer/presentation/widgets/faq_item.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +10,8 @@ class FAQScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        foregroundColor: AppColors.white,
+        foregroundColor:
+            isDarkMode(context) ? AppColors.white : AppColors.black,
         title: const Text('FAQ'),
       ),
       body: ListView(

@@ -1,4 +1,5 @@
 import 'package:chat_gpt/core/extensions/sized_box.dart';
+import 'package:chat_gpt/core/functions/is_dark.dart';
 import 'package:chat_gpt/core/services/di.dart';
 import 'package:chat_gpt/core/static/app_styles.dart';
 import 'package:chat_gpt/core/static/icons.dart';
@@ -42,7 +43,9 @@ class _ExistingChatScreenState extends State<ExistingChatScreen> {
           bottom: PreferredSize(
             preferredSize: const Size.fromHeight(4.0),
             child: Container(
-              color: AppColors.white.withOpacity(0.4),
+              color: isDarkMode(context)
+                  ? AppColors.white.withOpacity(0.4)
+                  : AppColors.black.withOpacity(0.4),
               height: 1.0,
             ),
           ),
@@ -60,8 +63,10 @@ class _ExistingChatScreenState extends State<ExistingChatScreen> {
                   12.pw,
                   Text(
                     'Back',
-                    style: AppStyles.semiBold15white
-                        .copyWith(color: AppColors.white),
+                    style: AppStyles.semiBold15white.copyWith(
+                        color: isDarkMode(context)
+                            ? AppColors.white
+                            : AppColors.black),
                   )
                 ],
               ),
@@ -73,6 +78,9 @@ class _ExistingChatScreenState extends State<ExistingChatScreen> {
               child: SvgPicture.asset(
                 AppIcons.logo,
                 height: 24,
+                colorFilter: ColorFilter.mode(
+                    isDarkMode(context) ? AppColors.white : AppColors.black,
+                    BlendMode.srcIn),
               ),
             ),
           ],
@@ -89,7 +97,9 @@ class _ExistingChatScreenState extends State<ExistingChatScreen> {
                       'Ask anything, get your answer',
                       style: AppStyles.semiBold15white.copyWith(
                         fontSize: 16.r,
-                        color: AppColors.white.withOpacity(0.4),
+                        color: isDarkMode(context)
+                            ? AppColors.white.withOpacity(0.4)
+                            : AppColors.black.withOpacity(0.4),
                       ),
                     ),
                   ),

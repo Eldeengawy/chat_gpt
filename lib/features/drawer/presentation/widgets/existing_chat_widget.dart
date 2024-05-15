@@ -1,5 +1,6 @@
 import 'package:chat_gpt/config/routes/routes.dart';
 import 'package:chat_gpt/core/extensions/sized_box.dart';
+import 'package:chat_gpt/core/functions/is_dark.dart';
 import 'package:chat_gpt/core/functions/show_settings_menu.dart';
 import 'package:chat_gpt/core/static/app_styles.dart';
 import 'package:chat_gpt/core/static/icons.dart';
@@ -27,8 +28,11 @@ class ExistingChatWidget extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 16),
         decoration: BoxDecoration(
           border: Border(
-            bottom:
-                BorderSide(color: AppColors.white.withOpacity(0.4), width: 1),
+            bottom: BorderSide(
+                color: isDarkMode(context)
+                    ? AppColors.white.withOpacity(0.4)
+                    : AppColors.black.withOpacity(0.4),
+                width: 1),
           ),
         ),
         child: Row(
@@ -39,12 +43,18 @@ class ExistingChatWidget extends StatelessWidget {
                 children: [
                   SvgPicture.asset(
                     AppIcons.chat,
+                    colorFilter: ColorFilter.mode(
+                        isDarkMode(context) ? AppColors.white : AppColors.black,
+                        BlendMode.srcIn),
                   ),
                   16.pw,
                   Expanded(
                     child: Text(
                       chat.title,
-                      style: AppStyles.bold16white,
+                      style: AppStyles.bold16white.copyWith(
+                          color: isDarkMode(context)
+                              ? AppColors.white
+                              : AppColors.black),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -61,11 +71,19 @@ class ExistingChatWidget extends StatelessWidget {
                     },
                     child: CircleAvatar(
                         backgroundColor: Colors.transparent,
-                        child: SvgPicture.asset(AppIcons.menu))),
+                        child: SvgPicture.asset(
+                          AppIcons.menu,
+                          colorFilter: ColorFilter.mode(
+                              isDarkMode(context)
+                                  ? AppColors.white
+                                  : AppColors.black,
+                              BlendMode.srcIn),
+                        ))),
                 20.pw,
-                const Icon(
+                Icon(
                   Icons.keyboard_arrow_right_rounded,
-                  color: AppColors.white,
+                  color:
+                      isDarkMode(context) ? AppColors.white : AppColors.black,
                 ),
               ],
             ),

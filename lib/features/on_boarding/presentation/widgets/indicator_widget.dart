@@ -1,3 +1,4 @@
+import 'package:chat_gpt/core/functions/is_dark.dart';
 import 'package:chat_gpt/core/theme/colors.dart';
 import 'package:flutter/material.dart';
 
@@ -50,7 +51,9 @@ class IndicatorWidget extends StatelessWidget {
         borderRadius: BorderRadius.circular(12),
         color: indicatorIndex == pageIndex
             ? AppColors.primary
-            : AppColors.white.withOpacity(0.2),
+            : isDarkMode(context)
+                ? AppColors.white.withOpacity(0.2)
+                : AppColors.black.withOpacity(0.2),
       ),
     );
   }

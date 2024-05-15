@@ -6,6 +6,7 @@ import 'package:chat_gpt/features/chat/data/datasources/remote_datasource/chat_r
 import 'package:chat_gpt/features/chat/data/datasources/remote_datasource/chat_remote_data_source_impl.dart';
 import 'package:chat_gpt/features/chat/data/repositories/chats_repo_impl.dart';
 import 'package:chat_gpt/features/chat/domain/repositories/chats_repo.dart';
+import 'package:chat_gpt/features/drawer/presentation/cubit/drawer_cubit.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -14,6 +15,7 @@ final sl = GetIt.instance;
 
 Future<void> initLocator() async {
   //? Cubits
+  sl.registerFactory<DrawerCubit>(() => DrawerCubit(sl()));
 
   //* Repository
   sl.registerLazySingleton<ChatsRepo>(() => ChatsRepoImpl(sl(), sl()));

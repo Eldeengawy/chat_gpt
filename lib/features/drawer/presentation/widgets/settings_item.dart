@@ -1,4 +1,5 @@
 import 'package:chat_gpt/core/extensions/sized_box.dart';
+import 'package:chat_gpt/core/extensions/txt_theme.dart';
 import 'package:chat_gpt/core/static/app_styles.dart';
 import 'package:chat_gpt/core/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +9,7 @@ class SettingsItem extends StatelessWidget {
   final String title;
   final String icon;
   final Color? color;
+  final Widget? suffixWidget;
   final void Function()? onTap;
   final bool? isNew;
   const SettingsItem({
@@ -17,10 +19,12 @@ class SettingsItem extends StatelessWidget {
     this.color = AppColors.white,
     this.isNew = false,
     this.onTap,
+    this.suffixWidget,
   });
 
   @override
   Widget build(BuildContext context) {
+   
     return GestureDetector(
       onTap: onTap,
       child: Container(
@@ -41,6 +45,7 @@ class SettingsItem extends StatelessWidget {
                 ),
               ],
             ),
+            if (suffixWidget != null) ...[suffixWidget!],
             if (isNew!) ...[
               Container(
                 padding: const EdgeInsets.symmetric(vertical: 3, horizontal: 8),

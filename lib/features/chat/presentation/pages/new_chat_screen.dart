@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:chat_gpt/config/routes/routes.dart';
 import 'package:chat_gpt/core/extensions/sized_box.dart';
+import 'package:chat_gpt/core/functions/is_dark.dart';
 import 'package:chat_gpt/core/services/di.dart';
 import 'package:chat_gpt/core/static/app_styles.dart';
 import 'package:chat_gpt/core/static/icons.dart';
@@ -45,14 +46,16 @@ class _NewChatScreenState extends State<NewChatScreen> {
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(4.0),
           child: Container(
-            color: AppColors.white.withOpacity(0.4),
+            color: isDarkMode(context)
+                ? AppColors.white.withOpacity(0.4)
+                : AppColors.black.withOpacity(0.4),
             height: 1.0,
           ),
         ),
         leading: GestureDetector(
           onTap: () {
-            // context.go(Routes.drawer);
-            context.pushReplacement(Routes.drawer);
+            // context.pop(messages[0]);
+            context.replaceNamed(Routes.drawer);
           },
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -64,8 +67,10 @@ class _NewChatScreenState extends State<NewChatScreen> {
                 12.pw,
                 Text(
                   'Back',
-                  style: AppStyles.semiBold15white
-                      .copyWith(color: AppColors.white),
+                  style: AppStyles.semiBold15white.copyWith(
+                    color:
+                        isDarkMode(context) ? AppColors.white : AppColors.black,
+                  ),
                 )
               ],
             ),
@@ -77,6 +82,9 @@ class _NewChatScreenState extends State<NewChatScreen> {
             child: SvgPicture.asset(
               AppIcons.logo,
               height: 24,
+              colorFilter: ColorFilter.mode(
+                  isDarkMode(context) ? AppColors.white : AppColors.black,
+                  BlendMode.srcIn),
             ),
           ),
         ],
@@ -93,7 +101,9 @@ class _NewChatScreenState extends State<NewChatScreen> {
                     'Ask anything, get your answer',
                     style: AppStyles.semiBold15white.copyWith(
                       fontSize: 16.r,
-                      color: AppColors.white.withOpacity(0.4),
+                      color: isDarkMode(context)
+                          ? AppColors.white.withOpacity(0.4)
+                          : AppColors.black.withOpacity(0.4),
                     ),
                   ),
                 ),
